@@ -23,7 +23,7 @@ def print_puzzle(puzzle):
                 print(str(puzzle[i][j]) + " ", end="")
 
 
-print_puzzle(puzzle)
+
 empty_positions=[]
 """
 Order of Execution:
@@ -43,21 +43,34 @@ def search_for_zero(puzzle):
         for j in range(len(puzzle[i])):
             if puzzle[i][j]==0:
                 return i,j
-    return True
+    return False
 
 def solve(puzzle):
     cell = search_for_zero(puzzle)
+
     
-    if cell:
-        return True
-    
-    else:
-        row, col = cell
+    if not search_for_zero(puzzle):
+        return print_puzzle(puzzle)
+    row, col = cell
 
-    for i in range(len(puzzle)):
-        pass
+    for i in range(1,len(puzzle)+1):
+        if is_valid(puzzle, row, col, i):
+            puzzle[row][col] == i
 
-    return False
+            solve(puzzle)
+        
+        puzzle[row][col]=0
+
+    return print_puzzle(puzzle)
 
 
+def is_valid(puzzle, row, col, i):
+    for i in range(1,len(puzzle)+1):
+        if puzzle[row][i]==i:
+            print("im here")
+            return False
+        if puzzle[i][col]==i:
+            return False
+    return True
 
+solve(puzzle)
