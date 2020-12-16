@@ -51,7 +51,6 @@ def solve(puzzle):
         if is_valid(puzzle, row, col, i):
             puzzle[row][col] = i
             if solve(puzzle):
-                print_puzzle(puzzle)
                 return True
             puzzle[row][col]=0
     return False
@@ -65,6 +64,14 @@ def is_valid(puzzle, row, col, n):
         for j in range(3):
             if(puzzle[i + row-row%3][j + col-col%3] == n):
                 return False
-            else:
-                return True
+           
+    return True
+
+print("\nPuzzle Unsolved")
+print("------------------------")
+print_puzzle(puzzle)
 solve(puzzle)
+print()
+print("Puzzle Solved")
+print("------------------------")
+print_puzzle(puzzle)
